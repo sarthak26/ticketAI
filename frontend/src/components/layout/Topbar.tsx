@@ -8,7 +8,7 @@ export const Topbar = () => (
       <div>
         <div className="flex items-center gap-2">
           <h2 className="text-lg font-semibold text-slate-900">AI Support Ticket Auto-Reply</h2>
-          <span className="rounded-full border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700">
+          <span className="rounded-full border border-purple-200 bg-[#f6ebff] px-2.5 py-1 text-xs font-medium text-[#6204b4]">
             Powered by TicketAI
           </span>
         </div>

@@ -45,7 +45,7 @@ export const TicketsTable = ({ onSelectTicket }: TicketsTableProps) => {
 
   return (
     <div className="space-y-4">
-      <div className="grid gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-4">
+      <div className="grid gap-3 rounded-xl border border-purple-100 bg-white/90 p-4 shadow-soft md:grid-cols-4">
         <Input
           placeholder="Search customer or subject..."
           value={search}

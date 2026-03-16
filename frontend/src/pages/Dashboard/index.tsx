@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Bar, BarChart, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
+import { Badge } from '../../components/ui/Badge';
 import { Table, TableContainer, TableShell, Td, Th, Thead, Tr } from '../../components/ui/Table';
 import { api } from '../../services/api';
 import type { DashboardData } from '../../types';
@@ -45,7 +46,7 @@ export const DashboardPage = () => {
         {stats.map((stat) => (
           <Card key={stat.label}>
             <CardContent>
-              <p className="text-sm text-slate-500">{stat.label}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-[#6204b4]">{stat.label}</p>
               <p className="mt-2 text-3xl font-semibold tracking-tight text-slate-900">{stat.value}</p>
             </CardContent>
           </Card>
@@ -63,7 +64,7 @@ export const DashboardPage = () => {
                 <XAxis dataKey="day" stroke="#94a3b8" />
                 <YAxis stroke="#94a3b8" />
                 <Tooltip />
-                <Line type="monotone" dataKey="tickets" stroke="#4f46e5" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="tickets" stroke="#6204b4" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
@@ -79,7 +80,7 @@ export const DashboardPage = () => {
                 <XAxis dataKey="category" stroke="#94a3b8" />
                 <YAxis stroke="#94a3b8" />
                 <Tooltip />
-                <Bar dataKey="count" fill="#7c3aed" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill="#6204b4" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -108,7 +109,9 @@ export const DashboardPage = () => {
                     <Tr key={ticket.id}>
                       <Td>{ticket.customer.name}</Td>
                       <Td>{ticket.subject}</Td>
-                      <Td className="capitalize">{ticket.status.replace('_', ' ')}</Td>
+                      <Td>
+                        <Badge label={ticket.status} variant={ticket.status} />
+                      </Td>
                       <Td className="max-w-[420px] truncate text-slate-500">
                         {ticket.latest_ai_suggestion?.suggested_reply ?? '—'}
                       </Td>

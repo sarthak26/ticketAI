@@ -15,7 +15,7 @@ export const Table = ({ children }: { children: ReactNode }) => (
 );
 
 export const Thead = ({ children }: { children: ReactNode }) => (
-  <thead className="sticky top-0 z-10 bg-indigo-50/40">{children}</thead>
+  <thead className="sticky top-0 z-10 bg-[#f6ebff]/60">{children}</thead>
 );
 
 export const Th = ({ children, className, ...props }: ThHTMLAttributes<HTMLTableCellElement>) => (
@@ -28,7 +28,10 @@ export const Th = ({ children, className, ...props }: ThHTMLAttributes<HTMLTable
 );
 
 export const Tr = ({ children, className, ...props }: HTMLAttributes<HTMLTableRowElement>) => (
-  <tr className={cn('border-b border-slate-100 transition-colors hover:bg-indigo-50/50', className)} {...props}>
+  <tr
+    className={cn('border-b border-slate-100 transition-colors hover:bg-[#f6ebff]/40', className)}
+    {...props}
+  >
     {children}
   </tr>
 );

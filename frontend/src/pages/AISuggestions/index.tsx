@@ -49,7 +49,7 @@ export const AISuggestionsPage = () => {
       </div>
       <div className="grid gap-4 lg:grid-cols-2">
         {suggestions.map((suggestion) => (
-          <Card key={suggestion.id} className="border-indigo-100">
+          <Card key={suggestion.id} className="border-[#f6ebff]">
             <CardHeader>
               <h4 className="text-sm font-semibold text-slate-900">{suggestion.ticket_subject}</h4>
             </CardHeader>
@@ -60,7 +60,7 @@ export const AISuggestionsPage = () => {
               </div>
               <div>
                 <p className="text-xs uppercase tracking-wide text-slate-400">AI suggested reply</p>
-                <p className="mt-1 rounded-md bg-indigo-50/70 p-3 text-sm text-slate-700">
+                <p className="mt-1 rounded-md bg-[#f6ebff] p-3 text-sm text-slate-700">
                   {suggestion.suggested_reply}
                 </p>
               </div>

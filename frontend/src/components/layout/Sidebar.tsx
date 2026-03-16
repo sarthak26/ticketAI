@@ -26,7 +26,7 @@ export const Sidebar = () => (
             className={({ isActive }) =>
               `flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${
                 isActive
-                  ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white'
+                  ? 'bg-[linear-gradient(90deg,var(--purple--dark),#6204b4)] text-white'
                   : 'text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200'
               }`
             }

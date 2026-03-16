@@ -53,16 +53,16 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
         {toasts.map((toast) => {
           const variantStyles =
             toast.variant === 'success'
-              ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+              ? 'border-purple-200 bg-[#f6ebff] text-[#6204b4]'
               : toast.variant === 'error'
                 ? 'border-red-200 bg-red-50 text-red-900'
-                : 'border-indigo-200 bg-white text-slate-900';
+                : 'border-purple-100 bg-white text-slate-900';
           return (
             <div
               key={toast.id}
               className={`pointer-events-auto flex items-start gap-3 rounded-lg border px-4 py-3 shadow-soft ${variantStyles}`}
             >
-              <div className="mt-0.5 h-2 w-2 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500" />
+              <div className="mt-0.5 h-2 w-2 rounded-full bg-[linear-gradient(90deg,var(--purple--dark),#6204b4)]" />
               <div className="flex-1 text-sm">
                 {toast.title && <p className="font-medium">{toast.title}</p>}
                 <p className={toast.title ? 'mt-0.5' : ''}>{toast.message}</p>
