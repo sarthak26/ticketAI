@@ -96,7 +96,7 @@ class DashboardAPIView(APIView):
             Ticket.objects.values('category').annotate(total=Count('id')).order_by('-total')
         )
 
-        recent_tickets = Ticket.objects.select_related('customer').prefetch_related(
+        recent_tickets = Ticket.objects.select_related('customer', 'gmail_thread').prefetch_related(
             'ai_suggestions'
         ).order_by('-created')[:8]
 
@@ -127,7 +127,7 @@ class TicketsListAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        queryset = Ticket.objects.select_related('customer').prefetch_related(
+        queryset = Ticket.objects.select_related('customer', 'gmail_thread').prefetch_related(
             'ai_suggestions'
         ).order_by('-created')
 
@@ -155,7 +155,7 @@ class TicketDetailAPIView(APIView):
 
     def get(self, request, ticket_id: int):
         ticket = get_object_or_404(
-            Ticket.objects.select_related('customer').prefetch_related('ai_suggestions'),
+            Ticket.objects.select_related('customer', 'gmail_thread').prefetch_related('ai_suggestions'),
             id=ticket_id,
         )
         return Response({'data': TicketSerializer(ticket).data, 'pagination': {}})

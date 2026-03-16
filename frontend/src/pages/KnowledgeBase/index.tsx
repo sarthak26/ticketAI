@@ -3,12 +3,14 @@ import { useEffect, useState, type ChangeEvent } from 'react';
 import { Button } from '../../components/ui/Button';
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Table, TableContainer, TableShell, Td, Th, Thead, Tr } from '../../components/ui/Table';
+import { useToast } from '../../components/ui/ToastProvider';
 import { api } from '../../services/api';
 import type { KnowledgeDocument } from '../../types';
 
 export const KnowledgeBasePage = () => {
   const [documents, setDocuments] = useState<KnowledgeDocument[]>([]);
   const [uploading, setUploading] = useState(false);
+  const { showToast } = useToast();
 
   const fetchDocuments = async () => {
     const response = await api.getKnowledgeDocuments();
@@ -25,13 +27,17 @@ export const KnowledgeBasePage = () => {
       return;
     }
     if (!file.name.endsWith('.md') && !file.name.endsWith('.txt')) {
-      window.alert('Upload only .md or .txt files');
+      showToast('Upload only .md or .txt files', { variant: 'error' });
       return;
     }
     setUploading(true);
     try {
       await api.uploadKnowledgeDocument(file);
       await fetchDocuments();
+      showToast('Document uploaded', { variant: 'success' });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Upload failed';
+      showToast(message, { variant: 'error' });
     } finally {
       setUploading(false);
       event.target.value = '';

@@ -5,7 +5,7 @@ import { Topbar } from './Topbar';
 
 export const AppLayout = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-indigo-50/30">
-    <div className="mx-auto flex max-w-[1600px]">
+    <div className="flex w-full">
       <Sidebar />
       <main className="min-h-screen flex-1">
         <Topbar />

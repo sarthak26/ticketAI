@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '../../components/ui/Button';
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
+import { useToast } from '../../components/ui/ToastProvider';
 import { api } from '../../services/api';
 import type { AISuggestion } from '../../types';
 
 export const AISuggestionsPage = () => {
   const [suggestions, setSuggestions] = useState<AISuggestion[]>([]);
+  const { showToast } = useToast();
 
   const fetchSuggestions = async () => {
     const response = await api.getAISuggestions();
@@ -24,16 +26,19 @@ export const AISuggestionsPage = () => {
     }
     await api.updateAISuggestion(id, nextReply);
     await fetchSuggestions();
+    showToast('Suggestion updated', { variant: 'success' });
   };
 
   const onApprove = async (id: number) => {
     await api.approveAISuggestion(id);
     await fetchSuggestions();
+    showToast('Suggestion approved', { variant: 'success' });
   };
 
   const onReject = async (id: number) => {
     await api.rejectAISuggestion(id);
     await fetchSuggestions();
+    showToast('Suggestion rejected', { variant: 'info' });
   };
 
   return (

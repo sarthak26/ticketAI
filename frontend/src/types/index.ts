@@ -28,6 +28,7 @@ export interface Ticket {
   created: string;
   updated: string;
   latest_ai_suggestion: AISuggestion | null;
+  has_gmail_thread: boolean;
 }
 
 export interface KnowledgeDocument {
@@ -68,4 +69,15 @@ export interface ApiPagination {
 export interface ApiResponse<T> {
   data: T;
   pagination: ApiPagination;
+}
+
+export interface GmailIntegration {
+  email: string;
+  imap_host: string;
+  imap_port: number;
+  smtp_host: string;
+  smtp_port: number;
+  is_active: boolean;
+  last_synced: string | null;
+  last_error: string;
 }

@@ -54,6 +54,11 @@ Frontend URL: `http://127.0.0.1:5173`
 - `POST /api/ai-suggestions/:id/reject/`
 - `GET, POST /api/knowledge-documents/`
 - `GET, PUT /api/settings/`
+- `GET /api/integrations/gmail/status/`
+- `POST /api/integrations/gmail/connect/`
+- `POST /api/integrations/gmail/disconnect/`
+- `POST /api/integrations/gmail/sync/`
+- `POST /api/integrations/gmail/approve-and-reply/`
 
 All responses follow:
 

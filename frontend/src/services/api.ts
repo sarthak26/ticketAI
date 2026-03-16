@@ -2,6 +2,7 @@ import type {
   AISuggestion,
   ApiResponse,
   DashboardData,
+  GmailIntegration,
   KnowledgeDocument,
   Settings,
   Ticket,
@@ -134,4 +135,32 @@ export const api = {
       method: 'PUT',
       body: JSON.stringify(payload),
     }),
+
+  getGmailStatus: () =>
+    request<{ connected: boolean; integration?: GmailIntegration }>('/integrations/gmail/status/'),
+
+  connectGmail: (payload: { email: string; app_password: string }) =>
+    request<{ message: string }>('/integrations/gmail/connect/', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+
+  disconnectGmail: () =>
+    request<{ message: string }>('/integrations/gmail/disconnect/', {
+      method: 'POST',
+    }),
+
+  syncGmailTickets: () =>
+    request<{ created_tickets: number; skipped: number }>('/integrations/gmail/sync/', {
+      method: 'POST',
+    }),
+
+  approveAndSendGmailReply: (ticketId: number, replyText: string) =>
+    request<{ ticket_id: number; status: string; action: string }>(
+      '/integrations/gmail/approve-and-reply/',
+      {
+        method: 'POST',
+        body: JSON.stringify({ ticket_id: ticketId, reply_text: replyText }),
+      },
+    ),
 };

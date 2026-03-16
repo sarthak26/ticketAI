@@ -5,6 +5,7 @@ import { api } from '../services/api';
 import type { Ticket } from '../types';
 import { Badge } from './ui/Badge';
 import { Button } from './ui/Button';
+import { useToast } from './ui/ToastProvider';
 
 interface TicketDetailsPanelProps {
   ticket: Ticket | null;
@@ -15,6 +16,7 @@ interface TicketDetailsPanelProps {
 export const TicketDetailsPanel = ({ ticket, onClose, onRefresh }: TicketDetailsPanelProps) => {
   const [editedReply, setEditedReply] = useState(ticket?.latest_ai_suggestion?.suggested_reply ?? '');
   const [saving, setSaving] = useState(false);
+  const { showToast } = useToast();
 
   useEffect(() => {
     setEditedReply(ticket?.latest_ai_suggestion?.suggested_reply ?? '');
@@ -34,6 +36,10 @@ export const TicketDetailsPanel = ({ ticket, onClose, onRefresh }: TicketDetails
     try {
       await api.updateAISuggestion(suggestion.id, editedReply);
       onRefresh();
+      showToast('Reply updated', { variant: 'success' });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to update reply';
+      showToast(message, { variant: 'error' });
     } finally {
       setSaving(false);
     }
@@ -42,9 +48,18 @@ export const TicketDetailsPanel = ({ ticket, onClose, onRefresh }: TicketDetails
   const onApprove = async () => {
     setSaving(true);
     try {
-      await api.approveTicket(ticket.id);
+      const response = await api.approveAndSendGmailReply(ticket.id, editedReply);
       onRefresh();
       onClose();
+      const action = (response.data as { action?: string }).action ?? 'approved_and_sent';
+      const label =
+        action === 'approved_without_gmail_send'
+          ? 'Reply approved (no Gmail thread)'
+          : 'Reply approved and sent';
+      showToast(label, { variant: 'success' });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to approve and send reply';
+      showToast(message, { variant: 'error' });
     } finally {
       setSaving(false);
     }

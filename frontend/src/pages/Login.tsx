@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent, CardHeader } from '../components/ui/Card';
 import { Input } from '../components/ui/Input';
+import { useToast } from '../components/ui/ToastProvider';
 import { api } from '../services/api';
 
 export const LoginPage = () => {
@@ -12,6 +13,7 @@ export const LoginPage = () => {
   const [password, setPassword] = useState('admin123');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const { showToast } = useToast();
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,9 +26,12 @@ export const LoginPage = () => {
       } catch {
         // Seed may already exist; safe to ignore.
       }
+      showToast('Signed in', { variant: 'success' });
       navigate('/');
     } catch (requestError) {
-      setError(requestError instanceof Error ? requestError.message : 'Login failed');
+      const message = requestError instanceof Error ? requestError.message : 'Login failed';
+      setError(message);
+      showToast(message, { variant: 'error' });
     } finally {
       setLoading(false);
     }

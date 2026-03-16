@@ -29,6 +29,7 @@ class AISuggestionSerializer(serializers.ModelSerializer):
 class TicketSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer(read_only=True)
     latest_ai_suggestion = serializers.SerializerMethodField()
+    has_gmail_thread = serializers.SerializerMethodField()
 
     class Meta:
         model = Ticket
@@ -42,6 +43,7 @@ class TicketSerializer(serializers.ModelSerializer):
             'created',
             'updated',
             'latest_ai_suggestion',
+            'has_gmail_thread',
         ]
 
     def get_latest_ai_suggestion(self, obj: Ticket):
@@ -49,6 +51,9 @@ class TicketSerializer(serializers.ModelSerializer):
         if not suggestion:
             return None
         return AISuggestionSerializer(suggestion).data
+
+    def get_has_gmail_thread(self, obj: Ticket):
+        return hasattr(obj, 'gmail_thread')
 
 
 class KnowledgeDocumentSerializer(serializers.ModelSerializer):
