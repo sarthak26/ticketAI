@@ -63,7 +63,7 @@ export const DashboardPage = () => {
                 <XAxis dataKey="day" stroke="#94a3b8" />
                 <YAxis stroke="#94a3b8" />
                 <Tooltip />
-                <Line type="monotone" dataKey="tickets" stroke="#0f172a" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="tickets" stroke="#4f46e5" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
@@ -79,7 +79,7 @@ export const DashboardPage = () => {
                 <XAxis dataKey="category" stroke="#94a3b8" />
                 <YAxis stroke="#94a3b8" />
                 <Tooltip />
-                <Bar dataKey="count" fill="#334155" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="count" fill="#7c3aed" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>

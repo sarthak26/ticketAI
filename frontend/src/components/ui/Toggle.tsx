@@ -8,7 +8,7 @@ export const Toggle = ({ checked, onChange }: ToggleProps) => (
     type="button"
     onClick={() => onChange(!checked)}
     className={`relative h-6 w-11 rounded-full transition-colors ${
-      checked ? 'bg-slate-900' : 'bg-slate-300'
+      checked ? 'bg-indigo-600' : 'bg-slate-300'
     }`}
   >
     <span

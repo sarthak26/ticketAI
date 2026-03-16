@@ -10,9 +10,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<Variant, string> = {
-  default: 'bg-slate-900 text-white hover:bg-slate-800',
-  secondary: 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50',
-  ghost: 'text-slate-700 hover:bg-slate-100',
+  default: 'bg-indigo-600 text-white hover:bg-indigo-500',
+  secondary: 'bg-white border border-indigo-100 text-indigo-700 hover:bg-indigo-50',
+  ghost: 'text-indigo-700 hover:bg-indigo-50',
   danger: 'bg-red-600 text-white hover:bg-red-500',
 };
 
@@ -20,7 +20,7 @@ export const Button = ({ variant = 'default', className, children, ...props }: B
   <button
     className={cn(
       'inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium transition-colors',
-      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2',
       'disabled:cursor-not-allowed disabled:opacity-60',
       variants[variant],
       className,

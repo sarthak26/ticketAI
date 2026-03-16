@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand-indigo: #4f46e5;
+  --brand-purple: #7c3aed;
+  --brand-black: #09090b;
+  --brand-soft: #f5f3ff;
+}
+
 body {
   margin: 0;
   font-family:
